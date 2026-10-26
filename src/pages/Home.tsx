@@ -42,6 +42,16 @@ export default function Home() {
 
       {/* Hero */}
       <section id="inicio" className="relative overflow-hidden border-b border-line">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/hero-bg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden
+        />
+        <div aria-hidden className="absolute inset-0 bg-ink/70" />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
