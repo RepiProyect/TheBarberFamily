@@ -1,0 +1,19 @@
+{
+  "name": "BARBER THE FAMILY",
+  "short_name": "Barber Family",
+  "description": "Más que un corte, somos familia. Reserva tu turno.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

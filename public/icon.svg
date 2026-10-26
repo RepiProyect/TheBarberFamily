@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="THE BARBER FAMILY">
+  <rect width="512" height="512" rx="96" fill="#0d0d0f"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#c9a24b" stroke-width="10"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#c9a24b" stroke-width="2" opacity="0.5"/>
+  <!-- Razor + comb crossed -->
+  <g stroke="#c9a24b" stroke-width="12" stroke-linecap="round" fill="none">
+    <line x1="176" y1="336" x2="312" y2="200"/>
+    <line x1="336" y1="336" x2="200" y2="200"/>
+  </g>
+  <text x="256" y="300" text-anchor="middle" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="150" fill="#f5f1e8" letter-spacing="4">BF</text>
+</svg>

@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta oficial BARBER THE FAMILY */
+  --color-ink: #111111;        /* Negro carbón */
+  --color-ink-2: #1a1a1a;
+  --color-surface: #262626;    /* Gris grafito */
+  --color-line: #3a3a3a;
+  --color-muted: #a6a6a6;      /* Gris acero (textos, bordes) */
+  --color-red: #e50914;        /* Rojo principal */
+  --color-red-dark: #b4070f;
+
+  /* Estados de turnos (para el panel) */
+  --color-estado-confirmada: #22c55e;
+  --color-estado-pendiente: #f59e0b;
+  --color-estado-cancelada: #e50914;
+  --color-estado-noshow: #a6a6a6;
+
+  --font-logo: "Pirata One", "UnifrakturCook", serif;
+  --font-display: "Oswald", system-ui, sans-serif;
+  --font-sans: "Montserrat", "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-ink);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-red);
+    color: #ffffff;
+  }
+}
