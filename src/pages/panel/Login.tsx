@@ -33,9 +33,23 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center bg-ink px-4 text-white">
-      <Logo className="mb-6 h-24 w-auto" />
-      <form onSubmit={enviar} className="w-full max-w-sm rounded-2xl border border-line bg-surface p-6">
+    <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-ink px-4 text-white">
+      {/* Video de fondo */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/login-bg.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden
+      />
+      {/* Capa oscura para legibilidad */}
+      <div aria-hidden className="absolute inset-0 bg-ink/65" />
+
+      <div className="relative z-10 flex w-full flex-col items-center">
+        <Logo className="mb-6 h-24 w-auto drop-shadow-[0_6px_24px_rgba(229,9,20,0.35)]" />
+        <form onSubmit={enviar} className="w-full max-w-sm rounded-2xl border border-line bg-surface/90 p-6 shadow-2xl backdrop-blur-md">
         <h1 className="mb-1 font-display text-3xl font-bold uppercase tracking-wide">Panel</h1>
         <p className="mb-6 text-sm text-muted">Acceso solo para el equipo de la barbería.</p>
 
@@ -76,9 +90,10 @@ export default function Login() {
           {cargando ? 'Entrando…' : 'Entrar'}
         </button>
       </form>
-      <Link to="/" className="mt-6 text-sm text-muted hover:text-white">
-        ← Volver al sitio
-      </Link>
+        <Link to="/" className="mt-6 text-sm text-muted hover:text-white">
+          ← Volver al sitio
+        </Link>
+      </div>
     </div>
   )
 }
