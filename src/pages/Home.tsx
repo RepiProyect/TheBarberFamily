@@ -1,6 +1,9 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Logo } from '../components/Logo'
 import { BarberStripe } from '../components/BarberStripe'
+
+const MAPS_QUERY = 'Barber The Family, Cra. 1 #34-28, Neiva, Huila'
 
 const servicios = [
   { nombre: 'Corte clásico', desc: 'Máquina y tijera, lavado y peinado.', precio: '$25.000', dur: '40 min' },
@@ -154,13 +157,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Galería / Nuestro espacio */}
+      <section className="mx-auto max-w-6xl px-4 py-20">
+        <div className="mb-10 text-center">
+          <h2 className="font-display text-5xl font-bold uppercase tracking-wide md:text-6xl">
+            Nuestro espacio
+          </h2>
+          <p className="mt-3 text-muted">Así se vive la experiencia BARBER THE FAMILY.</p>
+        </div>
+        <div className="mx-auto grid max-w-xl grid-cols-2 gap-4 sm:gap-6">
+          <AutoVideo src="/video-1.mp4" />
+          <AutoVideo src="/video-2.mp4" />
+        </div>
+      </section>
+
       {/* Ubicación / contacto */}
-      <section id="ubicacion" className="mx-auto max-w-6xl px-4 py-20 text-center">
-        <h2 className="font-display text-5xl font-bold uppercase tracking-wide md:text-6xl">Dónde estamos</h2>
-        <p className="mt-4 text-lg text-white">Neiva – Huila – Colombia</p>
-        <p className="mt-2 text-muted">
-          Agrega aquí tu dirección exacta y datos de contacto. Se podrán editar desde el panel.
-        </p>
+      <section id="ubicacion" className="mx-auto max-w-6xl px-4 py-20">
+        <div className="mb-8 text-center">
+          <h2 className="font-display text-5xl font-bold uppercase tracking-wide md:text-6xl">
+            Dónde estamos
+          </h2>
+          <p className="mt-4 text-lg text-white">Cra. 1 #34-28 · Neiva, Huila</p>
+        </div>
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-line">
+          <iframe
+            title="Mapa — BARBER THE FAMILY"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&output=embed`}
+            className="h-80 w-full"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+        <div className="mt-6 text-center">
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAPS_QUERY)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-red px-8 py-3 font-semibold text-white transition hover:bg-red-dark"
+          >
+            📍 Cómo llegar
+          </a>
+        </div>
       </section>
 
       <BarberStripe />
@@ -181,5 +218,34 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  )
+}
+
+/** Video vertical que se reproduce solo cuando entra en pantalla (ahorra datos). */
+function AutoVideo({ src }: { src: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) v.play().catch(() => {})
+        else v.pause()
+      },
+      { threshold: 0.3 },
+    )
+    io.observe(v)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <video
+      ref={ref}
+      src={src}
+      className="aspect-[9/16] w-full rounded-2xl border border-line object-cover"
+      loop
+      muted
+      playsInline
+      preload="metadata"
+    />
   )
 }
