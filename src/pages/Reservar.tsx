@@ -9,6 +9,7 @@ import {
   getHorarios,
   getSlotsDisponibles,
   crearReserva,
+  enviarConfirmacionWpp,
 } from '../lib/db'
 import type { Config, Servicio, Horario } from '../types'
 import {
@@ -179,12 +180,13 @@ export default function Reservar() {
 
     setEnviando(true)
     try {
-      await crearReserva({
+      const turnoId = await crearReserva({
         nombre: nombre.trim(),
         telefono: telefono.trim(),
         servicioId: servicioSel.id,
         inicio: slotSel.iso,
       })
+      enviarConfirmacionWpp(turnoId)
       setPaso('ok')
     } catch (e) {
       setError(e instanceof Error ? e.message : 'No se pudo crear la reserva')

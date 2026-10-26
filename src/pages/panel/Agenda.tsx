@@ -8,6 +8,7 @@ import {
   getServiciosActivos,
   getSlotsDisponibles,
   crearTurnoPanel,
+  enviarConfirmacionWpp,
 } from '../../lib/db'
 import { EstadoBadge } from '../../components/EstadoBadge'
 import {
@@ -256,7 +257,8 @@ function NuevoTurnoForm({
     setError(null)
     setGuardando(true)
     try {
-      await crearTurnoPanel({ nombre, telefono, servicio, inicio: slotIso })
+      const turno = await crearTurnoPanel({ nombre, telefono, servicio, inicio: slotIso })
+      enviarConfirmacionWpp(turno.id)
       onCreado()
     } catch (e) {
       setError(e instanceof Error ? e.message : 'No se pudo crear el turno')

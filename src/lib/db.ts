@@ -58,6 +58,20 @@ export async function crearReserva(params: {
   return data as string
 }
 
+/**
+ * Dispara la confirmación por WhatsApp (Edge Function "whatsapp").
+ * No falla la reserva si la función aún no está desplegada: se ignora el error.
+ */
+export async function enviarConfirmacionWpp(turnoId: string): Promise<void> {
+  try {
+    await supabase.functions.invoke('whatsapp', {
+      body: { action: 'confirmacion', turno_id: turnoId },
+    })
+  } catch {
+    // La mensajería automática puede no estar configurada todavía: no bloquea la reserva.
+  }
+}
+
 // ======================= Panel: turnos =======================
 
 const TURNO_SELECT =
